@@ -9,6 +9,7 @@ import {
   Select,
   SelectItem,
 } from '@heroui/react'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -20,7 +21,6 @@ import {
 } from '@/lib/types'
 import { GC_TO_KGDM_HA, isNum, normalizeMetRow } from '@/lib/utils'
 
-import { ForecastMapDisplay } from '@/components/forecast/forecast-map-display'
 import { MainChart } from '@/components/forecast/main-chart'
 import { MetTable } from '@/components/forecast/met-table'
 import { NetChart } from '@/components/forecast/net-chart'
@@ -28,6 +28,25 @@ import { OutlookTable } from '@/components/forecast/outlook-table'
 import { StatusBox } from '@/components/forecast/status-box'
 
 import { usePaddockBuilderStore } from '@/store/use-paddock-builder-store'
+
+// Cần tạo một component skeleton (hoặc div) để hiển thị khi bản đồ đang tải
+const MapLoadingSkeleton = () => (
+  <div className='flex h-[600px] w-full items-center justify-center rounded-md border bg-gray-100'>
+    <p>Loading map...</p>
+  </div>
+)
+
+// DÙNG DYNAMIC IMPORT VỚI SSR: FALSE
+const ForecastMapDisplay = dynamic(
+  () =>
+    import('@/components/forecast/forecast-map-display').then(
+      (mod) => mod.ForecastMapDisplay,
+    ),
+  {
+    ssr: false, // <-- Quan trọng nhất: Tắt Server-Side Rendering
+    loading: () => <MapLoadingSkeleton />, // Hiển thị cái này trong khi tải
+  },
+)
 
 // --- Hàm fetch API (wrapper) ---
 async function fetchJSON<T>(url: string): Promise<T> {
