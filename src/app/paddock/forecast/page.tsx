@@ -147,7 +147,9 @@ export default function PaddockForecastPage() {
 
   // Kiểu cho `onValueChange` của Select là `(value: string) => void`
   const handlePaddockChange = (value: string) => {
-    const paddock = allPaddockNames.find((p) => p.id === value)
+    const paddock = allPaddockNames.find(
+      (p: { id: string; name: string }) => p.id === value,
+    )
     if (!paddock) return
     setSelectedPaddock(paddock)
   }
