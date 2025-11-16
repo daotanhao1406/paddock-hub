@@ -12,7 +12,12 @@ import {
 import Image from 'next/image'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { MetData, MetRowNormalized, SeriesData } from '@/lib/types'
+import {
+  MetData,
+  MetRowNormalized,
+  PaddockFeature,
+  SeriesData,
+} from '@/lib/types'
 import { GC_TO_KGDM_HA, isNum, normalizeMetRow } from '@/lib/utils'
 
 import { ForecastMapDisplay } from '@/components/forecast/forecast-map-display'
@@ -44,7 +49,7 @@ export default function PaddockForecastPage() {
 
   // 2. Trích xuất danh sách tên (chỉ chạy 1 lần)
   const allPaddockNames = useMemo(() => {
-    return paddockFeatures.features.map((feature) => ({
+    return paddockFeatures.features.map((feature: PaddockFeature) => ({
       id: feature.properties.paddock_id,
       name: feature.properties.name,
     }))
@@ -244,7 +249,7 @@ export default function PaddockForecastPage() {
         </div>
       </div>
 
-      <MetTable rows={normalizedMetRows} isLoading={loading && !metData} />
+      <MetTable rows={normalizedMetRows} />
 
       <div className='grid grid-cols-1 xl:grid-cols-5 gap-4'>
         {/* CỘT BÊN TRAI */}
@@ -276,10 +281,7 @@ export default function PaddockForecastPage() {
 
         {/* CỘT BÊN TRÁI */}
         <div className='xl:col-span-3 space-y-4'>
-          <OutlookTable
-            rows={seriesData?.outlook || []}
-            isLoading={loading && !seriesData} // Chỉ loading khi chưa có data
-          />
+          <OutlookTable rows={seriesData?.outlook || []} />
         </div>
       </div>
     </div>
