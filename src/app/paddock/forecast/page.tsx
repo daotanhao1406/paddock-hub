@@ -24,9 +24,6 @@ import { StatusBox } from '@/components/forecast/status-box'
 
 import { usePaddockBuilderStore } from '@/store/use-paddock-builder-store'
 
-// --- Giả lập danh sách Paddock ---
-const paddocks: string[] = ['Paddock A', 'Paddock B', 'Paddock C']
-
 // --- Hàm fetch API (wrapper) ---
 async function fetchJSON<T>(url: string): Promise<T> {
   const r = await fetch(url)
@@ -157,6 +154,8 @@ export default function PaddockForecastPage() {
       setChartMode(value)
     }
   }
+
+  if (error) return null
 
   // --- Render ---
   return (

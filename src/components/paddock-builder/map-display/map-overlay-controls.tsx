@@ -61,9 +61,7 @@ export function MapOverlayControls() {
 
         // Parse thành đối tượng DateValue
         return parseDate(formattedStr)
-      } catch (e) {
-        // Xử lý nếu chuỗi ngày không hợp lệ
-        console.error('Invalid date string for DatePicker:', selectedDateString)
+      } catch {
         return null
       }
     }

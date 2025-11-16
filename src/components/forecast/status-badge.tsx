@@ -1,6 +1,6 @@
 // components/Badge.tsx
 'use client'
-import { Badge, Chip } from '@heroui/react'
+import { Chip } from '@heroui/react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import React from 'react'
 

@@ -42,10 +42,7 @@ function PaddockLayerManager({
   showPaddockNames: boolean
 }) {
   const map = useMap()
-  const { paddocks, savePaddocks } = usePaddockBuilderStore()
-  const [paddockToRename, setPaddockToRename] = useState<PaddockFeature | null>(
-    null,
-  )
+  const { paddocks } = usePaddockBuilderStore()
 
   // Lấy ref của FeatureGroup từ <EditControl>
   const featureGroupRef = useRef<LeafletFeatureGroup>(null)
@@ -81,9 +78,9 @@ function PaddockLayerManager({
       if (layer) {
         layer.feature = feature
 
-        layer.on('dblclick', () => {
-          setPaddockToRename(feature)
-        })
+        // layer.on('dblclick', () => {
+        //   setPaddockToRename(feature)
+        // })
 
         // 3. THÊM TOOLTIP CÓ ĐIỀU KIỆN
         if (showPaddockNames) {
@@ -114,48 +111,6 @@ function PaddockLayerManager({
       // Bỏ qua lỗi
     }
   }, [paddocks, map])
-
-  // --- 2. Xử lý sự kiện VẼ/SỬA/XÓA từ BẢN ĐỒ và cập nhật STORE ---
-
-  // Hàm helper để lấy TẤT CẢ features từ FeatureGroup
-  const getFeaturesFromGroup = (): PaddockFeature[] => {
-    const features: PaddockFeature[] = []
-    featureGroupRef.current?.eachLayer((layer) => {
-      const pLayer = layer as PaddockLayer
-      if (pLayer.feature) {
-        // Cập nhật geojson từ layer (nếu nó bị sửa)
-        const updatedGeoJSON = pLayer.toGeoJSON() as PaddockFeature
-        pLayer.feature.geometry = updatedGeoJSON.geometry
-        const latlngs = pLayer.getLatLngs() as L.LatLng[]
-        pLayer.feature.properties.area_ha =
-          L.GeometryUtil.geodesicArea(latlngs) / 10000
-        features.push(pLayer.feature)
-      }
-    })
-    return features
-  }
-
-  // --- 3. Xử lý Dialog Đổi tên ---
-  const handleRenameSave = (newName: string) => {
-    if (!paddockToRename) return
-
-    const features = getFeaturesFromGroup()
-    const featureToUpdate = features.find(
-      (f) => f.properties.paddock_id === paddockToRename.properties.paddock_id,
-    )
-
-    if (featureToUpdate) {
-      featureToUpdate.properties.name = newName
-      // Nếu là paddock mới (chưa có trong `features`), thêm nó vào
-    } else if (paddockToRename) {
-      paddockToRename.properties.name = newName
-      features.push(paddockToRename)
-    }
-
-    isInternalUpdate.current = true
-    savePaddocks(features) // Lưu lại toàn bộ
-    setPaddockToRename(null)
-  }
 
   return <FeatureGroup ref={featureGroupRef} />
 }

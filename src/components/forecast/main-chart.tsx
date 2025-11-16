@@ -1,10 +1,7 @@
 'use client'
 
-import Typography from '@/components/ui/typography'
-import { SeriesData } from '@/lib/types'
-import { GC_TO_KGDM_HA, isNum } from '@/lib/utils'
-import { Card, CardBody, CardHeader, Radio, RadioGroup } from '@heroui/react'
-import React, { useMemo, useState } from 'react'
+import { Card, CardBody } from '@heroui/react'
+import React from 'react'
 import {
   Bar,
   CartesianGrid,
@@ -17,6 +14,8 @@ import {
   YAxis,
 } from 'recharts'
 import { TooltipContentProps } from 'recharts/types/component/Tooltip'
+
+import Typography from '@/components/ui/typography'
 
 // Kiểu dữ liệu cho mỗi hàng trong biểu đồ
 interface ChartData {
@@ -60,8 +59,6 @@ const CustomTooltip = ({
 }
 
 export function MainChart({ data, yAxisLabel }: MainChartProps) {
-  const [chartType, setChartType] = useState('bar')
-
   return (
     <>
       <ResponsiveContainer width='100%' height={360}>
@@ -109,7 +106,7 @@ export function MainChart({ data, yAxisLabel }: MainChartProps) {
           <Tooltip
             content={
               <CustomTooltip
-                activeIndex={'0'}
+                activeIndex='0'
                 active={false}
                 payload={[]}
                 coordinate={{ x: 0, y: 0 }}

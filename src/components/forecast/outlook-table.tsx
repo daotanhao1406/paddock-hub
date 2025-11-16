@@ -11,18 +11,18 @@ import {
 import React from 'react'
 
 import { OutlookRow } from '@/lib/types'
+
 import StatusBadge from '@/components/forecast/status-badge'
 import Typography from '@/components/ui/typography'
 
 interface OutlookTableProps {
   rows: OutlookRow[]
-  isLoading: boolean
 }
 
-export function OutlookTable({ rows, isLoading }: OutlookTableProps) {
+export function OutlookTable({ rows }: OutlookTableProps) {
   return (
     <Table
-      topContent={'Plain-English outlook (next 16 days)'}
+      topContent='Plain-English outlook (next 16 days)'
       bottomContent={
         <Typography type='secondary' size='sm' className='mt-2'>
           Green = good conditions, Amber = watch, Red = limiting. “Overall”

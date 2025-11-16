@@ -1,9 +1,6 @@
 // components/MetTable.tsx
 'use client'
 import {
-  Card,
-  CardBody,
-  CardHeader,
   Table,
   TableBody,
   TableCell,
@@ -12,10 +9,10 @@ import {
   TableRow,
   Tooltip,
 } from '@heroui/react'
+import { Info } from 'lucide-react'
 import React from 'react'
 
 import { MetRowNormalized } from '@/lib/types'
-import { Info } from 'lucide-react'
 import { fmt } from '@/lib/utils'
 
 // Helper nhỏ để tạo tiêu đề bảng
@@ -45,10 +42,9 @@ import { fmt } from '@/lib/utils'
 
 interface MetTableProps {
   rows: MetRowNormalized[]
-  isLoading: boolean
 }
 
-export function MetTable({ rows, isLoading }: MetTableProps) {
+export function MetTable({ rows }: MetTableProps) {
   return (
     <Table topContent='Forecast weather details'>
       <TableHeader>

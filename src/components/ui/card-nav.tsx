@@ -1,5 +1,5 @@
 import { gsap } from 'gsap'
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useCallback, useLayoutEffect, useRef, useState } from 'react'
 
 type CardNavLink = {
   label: string
@@ -37,8 +37,6 @@ const CardNav: React.FC<CardNavProps> = ({
   ease = 'power3.out',
   baseColor = '#fff',
   menuColor,
-  buttonBgColor,
-  buttonTextColor,
   renderAfter,
   onItemClick,
 }) => {
@@ -84,7 +82,7 @@ const CardNav: React.FC<CardNavProps> = ({
     return 260
   }
 
-  const createTimeline = () => {
+  const createTimeline = useCallback(() => {
     const navEl = navRef.current
     if (!navEl) return null
 
@@ -106,7 +104,7 @@ const CardNav: React.FC<CardNavProps> = ({
     )
 
     return tl
-  }
+  }, [ease])
 
   useLayoutEffect(() => {
     const tl = createTimeline()
@@ -116,7 +114,7 @@ const CardNav: React.FC<CardNavProps> = ({
       tl?.kill()
       tlRef.current = null
     }
-  }, [ease, items])
+  }, [ease, items, createTimeline])
 
   // 2. Hook `useLayoutEffect` thứ hai: Xử lý animation dựa trên state
   // Đây là hook "phản ứng" với state
@@ -164,7 +162,7 @@ const CardNav: React.FC<CardNavProps> = ({
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [ease, items]) // CHANGED: Đã XÓA `isExpanded` khỏi đây
+  }, [ease, items, createTimeline]) // CHANGED: Đã XÓA `isExpanded` khỏi đây
 
   // 4. Hàm `toggleMenu` (được gọi bởi hamburger)
   // Giờ nó CHỈ thay đổi state

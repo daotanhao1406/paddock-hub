@@ -49,12 +49,6 @@ export function FeedResultsTable({ results, isLoading }: Props) {
     )
   }
 
-  // Tính tổng
-  const totals = {
-    available_kg: results.reduce((sum, r) => sum + r.available_kg, 0),
-    dse_days: results.reduce((sum, r) => sum + r.dse_days, 0),
-  }
-
   const columns = [
     { name: 'Paddock', uid: 'name' },
     { name: 'Status', uid: 'status' },
