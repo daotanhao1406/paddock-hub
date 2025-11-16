@@ -1,0 +1,90 @@
+import { NextResponse } from 'next/server'
+
+import { MetData } from '@/lib/types'
+
+// Dữ liệu này BẮT BUỘC phải tuân thủ kiểu MetData (tức là MetRowRaw[])
+const mockData: MetData = {
+  rows: [
+    {
+      date: '2025-11-08',
+      PAR_MJ_m2: 25.1,
+      APAR_MJ_m2: 21.3,
+      TMIN_C: 18.0,
+      TMAX_C: 27.0,
+      TMEAN_C: 22.5,
+      EA_KPA: 1.5,
+      VPD_KPA: 1.2,
+      U2_MEAN: 2.5,
+      RAIN_MM: 0.0,
+      ET0_mm: 3.1,
+      fPAR: 0.85,
+      LAI: 3.5,
+    },
+    {
+      date: '2025-11-09',
+      PAR_MJ_m2: 26.0,
+      APAR_MJ_m2: 22.1,
+      TMIN_C: 19.0,
+      TMAX_C: 28.0,
+      TMEAN_C: 23.5,
+      EA_KPA: 1.4,
+      VPD_KPA: 1.4,
+      U2_MEAN: 3.0,
+      RAIN_MM: 0.0,
+      ET0_mm: 3.5,
+      fPAR: 0.85,
+      LAI: 3.5,
+    },
+    {
+      date: '2025-11-10',
+      PAR_MJ_m2: 20.0,
+      APAR_MJ_m2: 17.0,
+      TMIN_C: 17.0,
+      TMAX_C: 25.0,
+      TMEAN_C: 21.0,
+      EA_KPA: 1.8,
+      VPD_KPA: 0.8,
+      U2_MEAN: 1.5,
+      RAIN_MM: 5.5,
+      ET0_mm: 2.0,
+      fPAR: 0.85,
+      LAI: 3.5,
+    },
+    {
+      date: '2025-11-11',
+      PAR_MJ_m2: 22.0,
+      APAR_MJ_m2: 18.7,
+      TMIN_C: 17.5,
+      TMAX_C: 26.0,
+      TMEAN_C: 21.8,
+      EA_KPA: 1.7,
+      VPD_KPA: 1.0,
+      U2_MEAN: 2.0,
+      RAIN_MM: 1.2,
+      ET0_mm: 2.5,
+      fPAR: 0.85,
+      LAI: 3.5,
+    },
+    {
+      date: '2025-11-12',
+      PAR_MJ_m2: 24.5,
+      APAR_MJ_m2: 20.8,
+      TMIN_C: 18.5,
+      TMAX_C: 27.5,
+      TMEAN_C: 23.0,
+      EA_KPA: 1.6,
+      VPD_KPA: 1.1,
+      U2_MEAN: 2.2,
+      RAIN_MM: 0.0,
+      ET0_mm: 3.3,
+      fPAR: 0.85,
+      LAI: 3.5,
+    },
+  ],
+}
+
+export async function GET() {
+  // request: Request,
+  // { params }: { params: { pid: string } },
+  return NextResponse.json(mockData)
+}

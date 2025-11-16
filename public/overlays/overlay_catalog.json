@@ -1,0 +1,13 @@
+{
+  "farm_id": "north-road",
+  "farm_name": "North Road",
+  "farm_type": "",
+  "generated_at": "2025-10-28T03:44:19Z",
+  "indices": {
+    "NDVI": "/media/lachie/SSD2/paddock/overlays/north-road/NDVI/NDVI_manifest.json",
+    "BIOMASS_T_HA": "/media/lachie/SSD2/paddock/overlays/north-road/BIOMASS_T_HA/BIOMASS_T_HA_manifest.json",
+    "CRUDE_PROTEIN_PCT": "/media/lachie/SSD2/paddock/overlays/north-road/CRUDE_PROTEIN_PCT/CRUDE_PROTEIN_PCT_manifest.json",
+    "N_UPTAKE_KG_HA": "/media/lachie/SSD2/paddock/overlays/north-road/N_UPTAKE_KG_HA/N_UPTAKE_KG_HA_manifest.json",
+    "VEG_WATER_PCT": "/media/lachie/SSD2/paddock/overlays/north-road/VEG_WATER_PCT/VEG_WATER_PCT_manifest.json"
+  }
+}
